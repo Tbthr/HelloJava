@@ -1,8 +1,10 @@
+package utils;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class test {
+public class FileName {
 
     private static List<String> res = new ArrayList<>();
 
