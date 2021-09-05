@@ -1,46 +1,47 @@
 package programming.sort;
 
 public class QuickSort {
-    private static void quickSort(int[] arr, int low, int high){
-        int i,j,temp,t;
-        if(low>=high){
+
+    // ä¸¤è¾¹å¯»æ‰¾
+    private static void quickSort(int[] arr, int low, int high) {
+        int i, j, temp, t;
+        if (low >= high) {
             return;
         }
-        i=low;
-        j=high;
-        //temp¾ÍÊÇ»ù×¼Î»
+        i = low;
+        j = high;
+        //tempå°±æ˜¯åŸºå‡†ä½
         temp = arr[low];
-        while (i<j) {
-            //ÏÈ¿´ÓÒ±ß£¬ÒÀ´ÎÍù×óµİ¼õ
-            while (temp<=arr[j]&&i<j) {
+        while (i < j) {
+            //å…ˆçœ‹å³è¾¹ï¼Œä¾æ¬¡å¾€å·¦é€’å‡
+            while (temp <= arr[j] && i < j) {
                 j--;
             }
-            //ÔÙ¿´×ó±ß£¬ÒÀ´ÎÍùÓÒµİÔö
-            while (temp>=arr[i]&&i<j) {
+            //å†çœ‹å·¦è¾¹ï¼Œä¾æ¬¡å¾€å³é€’å¢
+            while (temp >= arr[i] && i < j) {
                 i++;
             }
-            //Èç¹ûÂú×ãÌõ¼şÔò½»»»
-            if (i<j) {
+            //å¦‚æœæ»¡è¶³æ¡ä»¶åˆ™äº¤æ¢
+            if (i < j) {
                 t = arr[j];
                 arr[j] = arr[i];
                 arr[i] = t;
             }
         }
-        //×îºó½«»ù×¼ÎªÓëiºÍjÏàµÈÎ»ÖÃµÄÊı×Ö½»»»
+        //æœ€åå°†åŸºå‡†ä¸ºä¸iå’Œjç›¸ç­‰ä½ç½®çš„æ•°å­—äº¤æ¢
         arr[low] = arr[j];
         arr[j] = temp;
-        //µİ¹éµ÷ÓÃ×ó°ëÊı×é
-        quickSort(arr, low, i-1);
-        //µİ¹éµ÷ÓÃÓÒ°ëÊı×é
-        quickSort(arr, i+1, high);
+        //é€’å½’è°ƒç”¨å·¦åŠæ•°ç»„
+        quickSort(arr, low, i - 1);
+        //é€’å½’è°ƒç”¨å³åŠæ•°ç»„
+        quickSort(arr, i + 1, high);
     }
 
-
-    public static void main(String[] args){
-        int[] arr = {10,7,2,4,7,62,3,4,2,1,8,9,19};
-        quickSort(arr, 0, arr.length-1);
+    public static void main(String[] args) {
+        int[] arr = {10, 7, 2, 4, 7, 62, 3, 4, 2, 1, 8, 9, 19};
+        quickSort(arr, 0, arr.length - 1);
         for (int value : arr) {
-            System.out.println(value);
+            System.out.print(value + " ");
         }
     }
 }
