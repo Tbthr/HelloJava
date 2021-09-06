@@ -1,4 +1,4 @@
-package programming.IO;
+package programming.io;
 
 import java.io.BufferedInputStream;
 import java.util.Scanner;

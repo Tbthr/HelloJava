@@ -1,4 +1,4 @@
-package programming.load;
+package programming.classLoad;
 
 public class OuterClassLoad {
 
