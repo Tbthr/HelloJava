@@ -2,14 +2,14 @@ package programming.thread.questions;
 
 import java.util.concurrent.TimeUnit;
 /**
- * 1、1个静态的同步方法，1个普通的同步方法 ，一个对象，先打印 发短信还是 打电话？发短信！
+ * 1、1个静态的同步方法，1个普通的同步方法 ，一个对象，先打印 发短信还是 打电话？打电话！
  * 2、1个静态的同步方法，1个普通的同步方法 ，两个对象，先打印 发短信还是 打电话？打电话！
  */
 public class Test4 {
     public static void main(String[] args) {
-        // 两个对象的Class类模板只有一个，static，锁的是Class
+        // 两个对象的Class类模板只有一个，static 锁的是Class
         Phone4 phone1 = new Phone4();
-        Phone4 phone2 = new Phone4();
+//        Phone4 phone2 = new Phone4();
         //锁的存在
         new Thread(() -> {
             phone1.sendSms();
@@ -23,7 +23,7 @@ public class Test4 {
         }
 
         new Thread(() -> {
-            phone2.call();
+            phone1.call();
         }, "B").start();
     }
 }

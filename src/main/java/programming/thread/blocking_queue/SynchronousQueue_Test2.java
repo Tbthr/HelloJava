@@ -1,4 +1,4 @@
-package programming.thread.blocking;
+package programming.thread.blocking_queue;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.SynchronousQueue;
@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * 和其他的BlockingQueue 不一样， SynchronousQueue 不存储元素
  * put了一个元素，必须从里面先take取出来，否则不能在put进去值！
  */
-public class SynchronousQueueDemo {
+public class SynchronousQueue_Test2 {
     public static void main(String[] args) {
         BlockingQueue<String> blockingQueue = new SynchronousQueue<>(); // 同步队列
 
