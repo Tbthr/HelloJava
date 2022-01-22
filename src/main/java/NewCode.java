@@ -342,7 +342,7 @@ public class NewCode {
                 bi + strategy(arr, restT - qi, curr + 1));
     }
 
-    public static int examStrategyDp(int[][] arr) {
+    public int examStrategyDp(int[][] arr) {
         if (arr == null || arr.length == 0) {
             return 0;
         }
@@ -377,6 +377,61 @@ public class NewCode {
         return dp[arr.length][120];
     }
 
+    //=================换钱的最少货币数=======================
+
+    public int minAmountMoney(int[] coins, int aim) {
+        if (coins == null || coins.length == 0) {
+            return 0;
+        }
+        return process(coins, aim);
+    }
+
+    // 换取金额为 rest 的面值时，所需要的最少货币数
+    public int process(int[] coins, int rest) {
+        // 如果剩余换取的钱是「负数」，说明此前的策略「无效」
+        if (rest < 0) {
+            return -1;
+        }
+        // 如果刚好换完（也可以理解为，换取0元的面值不需要钱）（同时也可以表示，之前的换取策略是有效的）
+        if (rest == 0) {
+            return 0;
+        }
+
+        int minCnt = Integer.MAX_VALUE;
+        // 尝试换取「所有可能的面值」，取所有策略中的「最小值」
+        for (int coin : coins) {
+            // 换取面值为 x 的最小货币数：可以先换取一张面值为 coin 的钱，然后再用剩余的钱去计算
+            // f(x) = f(x - coin) + 1
+            int res = process(coins, rest - coin) + 1;
+            if (res > 0 && res < minCnt) {
+                minCnt = res;
+            }
+        }
+        return minCnt == Integer.MAX_VALUE ? -1 : minCnt;
+    }
+
+    public int minAmountMoneyDp(int[] coins, int aim) {
+        if (coins == null || coins.length == 0) {
+            return 0;
+        }
+        // dp[i]：换取面值为 i 的钱时，所需的最少货币数
+        int[] dp = new int[aim + 1];
+        // 换取的货币数最大不会超过「aim」张，因为 coins[i] >= 1
+        // 由于此过程是「计算最小值」，所以把 dp 每一项赋予「最大值」
+        Arrays.fill(dp, aim + 1);
+        dp[0] = 0;
+        for (int i = 1; i <= aim; i++) {
+            for (int coin : coins) {
+                if (i - coin >= 0) {
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
+        }
+        // 如果值仍然是「aim+1」，说明没有任何一种硬币组合能组成总金额，即返回 -1
+        // 否则返回 dp[aim]
+        return (dp[aim] == aim + 1) ? -1 : dp[aim];
+    }
+
     public static void main(String[] args) {
         NewCode newCode = new NewCode();
         System.out.println("=====机器人到达指定位置放法数=====");
@@ -397,5 +452,9 @@ public class NewCode {
         System.out.println(newCode.climbMinCostDp(new int[]{1, 100, 1, 1, 1, 100, 1, 1, 100, 1}));
         System.out.println("=====考试策略=====");
         System.out.println(newCode.examStrategy(new int[][]{{20, 20, 100, 60}, {50, 30, 80, 55}, {100, 60, 110, 88}, {5, 3, 10, 6}}));
+        System.out.println(newCode.examStrategyDp(new int[][]{{20, 20, 100, 60}, {50, 30, 80, 55}, {100, 60, 110, 88}, {5, 3, 10, 6}}));
+        System.out.println("=====换钱的最少货币数=====");
+        System.out.println(newCode.minAmountMoney(new int[]{5, 2, 3}, 20));
+        System.out.println(newCode.minAmountMoneyDp(new int[]{5, 2, 3}, 20));
     }
 }
