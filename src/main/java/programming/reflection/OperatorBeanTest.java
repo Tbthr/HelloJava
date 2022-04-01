@@ -35,9 +35,17 @@ public class OperatorBeanTest {
         public static Operator createInstance(String oper){
             Operator operator;
             switch (oper) {
-                case "+" -> operator = new Add();
-                case "-" -> operator = new Sub();
-                default -> throw new IllegalStateException("Unexpected value: " + oper);
+                case "+" : {
+                    operator = new Add();
+                    break;
+                }
+                case "-" : {
+                    operator = new Sub();
+                    break;
+                }
+                default : {
+                    throw new IllegalStateException("Unexpected value: " + oper);
+                }
             }
             return operator;
         }

@@ -9,7 +9,7 @@ import java.io.IOException;
  * @author lyq_power
  * @date 2019/12/2 21:44 51s
  */
-public class dirCopy {
+public class DirCopy {
 
     public void copyDir(File file, String newPath) {
         String oldFilePath = file.getAbsolutePath();
@@ -57,7 +57,8 @@ public class dirCopy {
     }
 
     public static void main(String[] args) {
-        var copy = new dirCopy();
+//        var copy = new dirCopy();
+        DirCopy copy = new DirCopy();
         copy.copyDir(new File("C:\\Users\\刘以强\\Desktop\\Java语言程序设计\\Java实验报告\\a"), "D:\\test");
     }
 
