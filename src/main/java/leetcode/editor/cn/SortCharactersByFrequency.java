@@ -98,7 +98,8 @@ public class SortCharactersByFrequency {
                     for (char j : buckets[i]) {
                         // 遍历桶里的每个字符
                         // 字符出现了几次就向 res 中添加几次该字符
-                        res.append(String.valueOf(j).repeat(i));
+//                        res.append(String.valueOf(j).repeat(i));
+                        res.append(String.format("%1$" + i + "s", j));
                     }
                 }
             }
